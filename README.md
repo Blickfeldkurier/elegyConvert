@@ -1,4 +1,4 @@
-# Elegy for a Dead World - Export Tools
+# Elegy for a Dead World - Conversion Tools
 
 Tools to generate various text formats from the Elegy for a dead worlds export.
 Currently I just try to get the Title, Author and the fulltext.
@@ -19,7 +19,11 @@ a File to a given location.
 
 Export to latex.
     
-    ./elegy2json.py ~/Elegy/TheRaven/index.html | ./ex2Tex.py raven.tex 
+    ./elegy2json.py ~/Elegy/TheRaven/index.html | ./ex2Tex.py -o raven.tex 
+    
+Export to Markdown:
+    
+    ./elegy2json.py -o ravel.json ~/Elegy/TheRaven/index.html ; ./ex2Md.py -i raven.json  -o raven.tex
 
 ## Development
 Currently the elegy2json script returns a simple json object with the following structure
