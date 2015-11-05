@@ -4,10 +4,9 @@ import argparse
 import json
 import sys
 
-def genMarkdown(yfonts):
+def genMarkdown(lines, yfonts):
     retVal = ""
 
-    lines = sys.stdin.readline()
     obj = json.loads(lines)
 
     header = "\\documentclass[a4paper,10pt, twocolumn]{article}\n"
@@ -35,11 +34,17 @@ def genMarkdown(yfonts):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog='ex2MD.py')
+    parser.add_argument("-i", "--input", dest='inpath', help="Path to input JSON file")
     parser.add_argument("-o", "--output", dest='outpath', help="Path to output file")
     parser.add_argument("-y", "--yfonts", dest='yfonts', action='store_true', default=False, help="Use YFonts")
     args = parser.parse_args()
 
-    retVal = genMarkdown(args.yfonts)
+    if args.inpath:
+        with open(args.inpath, 'r') as content:
+            retVal = genMarkdown(content.read(),args.yfonts)
+    else:
+        retVal = genMarkdown(sys.stdin.readline(),args.yfonts)
+
     if(args.outpath):
         with open(args.outpath, 'w') as file:
             file.write(retVal)
