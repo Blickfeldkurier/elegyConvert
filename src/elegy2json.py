@@ -20,6 +20,14 @@ def parseElegy(filepath):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog='elegy2json.py')
+    parser.add_argument("-o", "--output", dest='outpath', help="Path to output file")
     parser.add_argument('filepath', help='Path to a elegy html file')
     args = parser.parse_args()
-    print(parseElegy(args.filepath))
+
+    retVal = parseElegy(args.filepath)
+
+    if(args.outpath):
+        with open(args.outpath, "w") as file:
+            file.write(retVal)
+    else:
+        print(retVal)
